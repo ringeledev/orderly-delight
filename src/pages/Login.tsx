@@ -37,9 +37,15 @@ const Login = () => {
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-sm flex flex-col items-center gap-8"
       >
-        <img src={logo} alt="Sazón Latino" className="w-32 h-32 rounded-full shadow-2xl" />
+        <img
+          src={logo}
+          alt="Sazón Latino"
+          className="w-32 h-32 rounded-full shadow-2xl"
+        />
         <h1 className="text-2xl font-display text-primary">Sazón Latino</h1>
-        <p className="text-muted-foreground text-sm">Ingresa tu PIN para continuar</p>
+        <p className="text-muted-foreground text-sm">
+          Ingresa tu PIN para continuar
+        </p>
 
         <div className="flex gap-3 mb-2">
           {[0, 1, 2, 3].map((i) => (
@@ -52,7 +58,9 @@ const Login = () => {
           ))}
         </div>
 
-        {error && <p className="text-destructive text-sm animate-fade-in">{error}</p>}
+        {error && (
+          <p className="text-destructive text-sm animate-fade-in">{error}</p>
+        )}
 
         <div className="grid grid-cols-3 gap-3">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((d) => (

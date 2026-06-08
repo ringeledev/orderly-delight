@@ -23,7 +23,10 @@ const AuthGate = () => {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/orders" element={<Orders />} />
-          <Route path="/reports" element={user.role === "admin" ? <Reports /> : <Dashboard />} />
+          <Route
+            path="/reports"
+            element={user.role === "admin" ? <Reports /> : <Dashboard />}
+          />
           <Route path="/menu" element={<Menu />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
