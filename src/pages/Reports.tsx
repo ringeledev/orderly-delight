@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { store } from "@/lib/store";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
-import { format, startOfDay, startOfWeek, startOfMonth, isAfter, subDays, subWeeks, subMonths } from "date-fns";
+import { format, startOfWeek, startOfMonth, isAfter, subDays, subWeeks, subMonths } from "date-fns";
 import { es } from "date-fns/locale";
 
 const COLORS = ["hsl(42,80%,55%)", "hsl(10,70%,50%)", "hsl(150,60%,45%)", "hsl(210,60%,50%)", "hsl(280,60%,50%)", "hsl(30,80%,50%)"];
@@ -10,7 +10,9 @@ type Period = "day" | "week" | "month";
 
 const Reports = () => {
   const [period, setPeriod] = useState<Period>("day");
-  const orders = store.getOrders().filter((o) => o.status === "paid");
+  
+  // 🛠️ CORRECCIÓN 1 (image_b18d6e.png): Agregamos (o: any) para evitar el error en .status
+  const orders = store.getOrders().filter((o: any) => o.status === "Pagado" || o.status === "paid");
 
   const cutoff = useMemo(() => {
     const now = new Date();
@@ -19,8 +21,13 @@ const Reports = () => {
     return subMonths(now, 6);
   }, [period]);
 
+  // 🛠️ CORRECCIÓN 2 (image_b19090.png): Usamos (o: any) y leemos dinámicamente timestamp o createdAt
   const filteredOrders = useMemo(
-    () => orders.filter((o) => isAfter(new Date(o.createdAt), cutoff)),
+    () => orders.filter((o: any) => {
+      const rawDate = o.timestamp || o.createdAt || Date.now();
+      const orderDate = new Date(rawDate);
+      return isAfter(orderDate, cutoff);
+    }),
     [orders, cutoff]
   );
 
@@ -29,8 +36,11 @@ const Reports = () => {
 
   const revenueByDate = useMemo(() => {
     const map: Record<string, number> = {};
-    filteredOrders.forEach((o) => {
-      const d = new Date(o.createdAt);
+    filteredOrders.forEach((o: any) => {
+      // 🛠️ CORRECCIÓN 3 (image_b19090.png): Consistencia al leer la fecha de la orden
+      const rawDate = o.timestamp || o.createdAt || Date.now();
+      const d = new Date(rawDate);
+      
       let key: string;
       if (period === "day") key = format(d, "dd/MM", { locale: es });
       else if (period === "week") key = "Sem " + format(startOfWeek(d), "dd/MM", { locale: es });

@@ -11,6 +11,7 @@ import Reports from "./pages/Reports";
 import Menu from "./pages/Menu";
 import AppLayout from "./components/AppLayout";
 import NotFound from "./pages/NotFound";
+import Mesas from "./pages/Mesas"; 
 
 const queryClient = new QueryClient();
 
@@ -21,17 +22,22 @@ const AuthGate = () => {
     <BrowserRouter>
       <AppLayout>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          {/* Cambiamos la raíz para que use tus nuevas Mesas con botones */}
+          <Route path="/" element={<Mesas />} />
+          
+          {/* Conservamos las demás rutas del sistema */}
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/orders" element={<Orders />} />
-          <Route path="/reports" element={user.role === "admin" ? <Reports /> : <Dashboard />} />
+          <Route path="/reports" element={user.role === "admin" ? <Reports /> : <Mesas />} />
           <Route path="/menu" element={<Menu />} />
+          
+          {/* Si ninguna ruta coincide, muestra error 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AppLayout>
     </BrowserRouter>
   );
 };
-
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
