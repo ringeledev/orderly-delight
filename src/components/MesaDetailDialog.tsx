@@ -242,9 +242,24 @@ const MesaDetailDialog = ({ mesa, onClose, onUpdate, onNewOrder }: Props) => {
                       <div className="border-t border-border px-3 pb-3 pt-2 space-y-1.5">
                         {pendientes.length > 0 && (
                           <>
-                            <p className="text-xs text-muted-foreground mb-1">
-                              Seleccioná los ítems a cobrar:
-                            </p>
+                            <div className="flex items-center justify-between mb-1">
+                              <p className="text-xs text-muted-foreground">
+                                Seleccioná los ítems a cobrar:
+                              </p>
+                              <button
+                                className="text-xs text-primary underline"
+                                onClick={() => {
+                                  const allIds = pendientes.map((d) => d.uuid).filter(Boolean) as string[];
+                                  const allSelected = allIds.every((id) => sel.has(id));
+                                  setSelectedItems((prev) => ({
+                                    ...prev,
+                                    [pedido.uuid]: allSelected ? new Set() : new Set(allIds),
+                                  }));
+                                }}
+                              >
+                                {pendientes.every((d) => d.uuid && sel.has(d.uuid)) ? "Deseleccionar todo" : "Seleccionar todo"}
+                              </button>
+                            </div>
                             {pendientes.map((d, i) => {
                               const checked = d.uuid ? sel.has(d.uuid) : false;
                               return (
