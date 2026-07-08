@@ -9,9 +9,9 @@ import Dashboard from "./pages/Dashboard";
 import Orders from "./pages/Orders";
 import Reports from "./pages/Reports";
 import Menu from "./pages/Menu";
+import Usuarios from "./pages/Usuarios";
 import AppLayout from "./components/AppLayout";
 import NotFound from "./pages/NotFound";
-import Mesas from "./pages/Mesas";
 
 const queryClient = new QueryClient();
 
@@ -23,14 +23,17 @@ const AuthGate = () => {
     <BrowserRouter>
       <AppLayout>
         <Routes>
-          <Route path="/" element={<Mesas />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/orders" element={<Orders />} />
           <Route
             path="/reports"
-            element={user.role === "admin" ? <Reports /> : <Mesas />}
+            element={user.role === "admin" ? <Reports /> : <Dashboard />}
           />
           <Route path="/menu" element={<Menu />} />
+          <Route
+            path="/usuarios"
+            element={user.role === "admin" ? <Usuarios /> : <Dashboard />}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AppLayout>

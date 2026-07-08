@@ -1,0 +1,14 @@
+[
+  {
+    "id": "cocina",
+    "nombre": "Impresora Cocina",
+    "nombreLocal": "EPSON TM-T88V Receipt (cocina)",
+    "tieneGaveta": false
+  },
+  {
+    "id": "barra",
+    "nombre": "Impresora Barra / Caja",
+    "nombreLocal": "EPSON TM-T88V Receipt(bar)",
+    "tieneGaveta": true
+  }
+]
