@@ -2,7 +2,7 @@ import { ReactNode, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { NavLink, useLocation } from "react-router-dom";
 import logo from "@/assets/logo.png";
-import { LayoutDashboard, ClipboardList, BarChart3, LogOut, UtensilsCrossed, Users } from "lucide-react";
+import { LayoutDashboard, ClipboardList, BarChart3, LogOut, UtensilsCrossed, Users, Printer } from "lucide-react";
 
 const AppLayout = ({ children }: { children: ReactNode }) => {
   const { user, logout } = useAuth();
@@ -15,6 +15,7 @@ const AppLayout = ({ children }: { children: ReactNode }) => {
     ...(user?.role === "admin" ? [
       { to: "/reports", icon: BarChart3, label: "Reportes" },
       { to: "/usuarios", icon: Users, label: "Usuarios" },
+      { to: "/impresoras", icon: Printer, label: "Impresoras" },
     ] : []),
     { to: "/menu", icon: UtensilsCrossed, label: "Menú" },
   ];

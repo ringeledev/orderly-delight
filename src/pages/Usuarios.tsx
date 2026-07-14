@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Pencil, Trash2, Plus, ShieldCheck, User, Eye, EyeOff } from "lucide-react";
-import PrinterTestPanel from "@/components/PrinterTestPanel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -127,8 +126,6 @@ export default function Usuarios() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
-      <PrinterTestPanel />
-
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-display text-primary">Usuarios</h1>

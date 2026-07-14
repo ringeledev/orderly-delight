@@ -10,6 +10,7 @@ import Orders from "./pages/Orders";
 import Reports from "./pages/Reports";
 import Menu from "./pages/Menu";
 import Usuarios from "./pages/Usuarios";
+import Impresoras from "./pages/Impresoras";
 import AppLayout from "./components/AppLayout";
 import NotFound from "./pages/NotFound";
 
@@ -33,6 +34,10 @@ const AuthGate = () => {
           <Route
             path="/usuarios"
             element={user.role === "admin" ? <Usuarios /> : <Dashboard />}
+          />
+          <Route
+            path="/impresoras"
+            element={user.role === "admin" ? <Impresoras /> : <Dashboard />}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>
