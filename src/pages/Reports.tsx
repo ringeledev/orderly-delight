@@ -228,7 +228,7 @@ const Reports = () => {
               <div className="flex items-center gap-1.5 text-muted-foreground text-xs mb-0.5">
                 <TrendingUp size={12} /> Ingresos
               </div>
-              <p className="text-2xl font-display text-primary">${totalRevenue.toFixed(2)}</p>
+              <p className="text-2xl font-display text-primary">€{totalRevenue.toFixed(2)}</p>
             </div>
             <div className="bg-card border border-border rounded-xl p-4">
               <div className="flex items-center gap-1.5 text-muted-foreground text-xs mb-0.5">
@@ -240,7 +240,7 @@ const Reports = () => {
               <div className="flex items-center gap-1.5 text-muted-foreground text-xs mb-0.5">
                 <TrendingUp size={12} /> Ticket prom.
               </div>
-              <p className="text-2xl font-display text-foreground">${ticketPromedio.toFixed(2)}</p>
+              <p className="text-2xl font-display text-foreground">€{ticketPromedio.toFixed(2)}</p>
             </div>
             <div className="bg-card border border-border rounded-xl p-4">
               <div className="flex items-center gap-1.5 text-muted-foreground text-xs mb-0.5">
@@ -278,7 +278,7 @@ const Reports = () => {
                         <span className="truncate">{cat.categoria}</span>
                       </div>
                       <p className={`font-display text-lg ${bebida ? "text-blue-200" : "text-foreground"}`}>
-                        ${cat.total.toFixed(2)}
+                        €{cat.total.toFixed(2)}
                       </p>
                       <p className="text-xs text-muted-foreground">{cat.qty} unidades · {pct.toFixed(0)}%</p>
                       <div className="h-1 bg-black/20 rounded-full overflow-hidden mt-2">
@@ -316,7 +316,7 @@ const Reports = () => {
               <UserCog size={18} className="text-purple-400 shrink-0" />
               <div>
                 <p className="text-sm font-display text-purple-300">
-                  Consumo Personal: ${totalPersonal.toFixed(2)} en {filteredPersonal.length} pedido
+                  Consumo Personal: €{totalPersonal.toFixed(2)} en {filteredPersonal.length} pedido
                   {filteredPersonal.length !== 1 ? "s" : ""}
                 </p>
                 <p className="text-xs text-muted-foreground">
@@ -370,7 +370,7 @@ const Reports = () => {
                         <p className="text-foreground">{p.name}</p>
                         <p className="text-muted-foreground text-xs">{p.qty} vendidos{p.categoria ? ` · ${p.categoria}` : ""}</p>
                       </div>
-                      <span className="text-primary font-semibold">${p.total.toFixed(2)}</span>
+                      <span className="text-primary font-semibold">€{p.total.toFixed(2)}</span>
                     </div>
                   ))
                 )}
@@ -411,9 +411,9 @@ const Reports = () => {
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className="text-primary font-semibold">${m.total.toFixed(2)}</p>
+                        <p className="text-primary font-semibold">€{m.total.toFixed(2)}</p>
                         <p className="text-muted-foreground text-xs">
-                          prom. ${m.pedidos > 0 ? (m.total / m.pedidos).toFixed(2) : "0.00"}
+                          prom. €{m.pedidos > 0 ? (m.total / m.pedidos).toFixed(2) : "0.00"}
                         </p>
                       </div>
                     </div>
@@ -437,7 +437,7 @@ const Reports = () => {
                   {bebidas.slice(0, 8).map((p, i) => (
                     <div key={i} className="flex justify-between text-sm">
                       <span className="text-foreground">{p.name}</span>
-                      <span className="text-muted-foreground text-xs">{p.qty}x · ${p.total.toFixed(2)}</span>
+                      <span className="text-muted-foreground text-xs">{p.qty}x · €{p.total.toFixed(2)}</span>
                     </div>
                   ))}
                 </div>
@@ -455,7 +455,7 @@ const Reports = () => {
                   {comidas.slice(0, 8).map((p, i) => (
                     <div key={i} className="flex justify-between text-sm">
                       <span className="text-foreground">{p.name}</span>
-                      <span className="text-muted-foreground text-xs">{p.qty}x · ${p.total.toFixed(2)}</span>
+                      <span className="text-muted-foreground text-xs">{p.qty}x · €{p.total.toFixed(2)}</span>
                     </div>
                   ))}
                 </div>
@@ -508,7 +508,7 @@ const Reports = () => {
                     </p>
                   </div>
                   <span className={`font-semibold ${anulado ? "line-through text-muted-foreground" : "text-primary"}`}>
-                    ${Number(o.total).toFixed(2)}
+                    €{Number(o.total).toFixed(2)}
                   </span>
                 </div>
                 );

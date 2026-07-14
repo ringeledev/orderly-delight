@@ -205,7 +205,7 @@ const Dashboard = () => {
               )}
             </div>
             <div className="flex items-center justify-between">
-              <p className="text-primary font-semibold">${total.toFixed(2)}</p>
+              <p className="text-primary font-semibold">€{total.toFixed(2)}</p>
               {meseroColor && (
                 <span
                   className="flex items-center gap-1 text-xs font-medium px-1.5 py-0.5 rounded-full"

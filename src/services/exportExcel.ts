@@ -109,7 +109,7 @@ export async function exportarReporteExcel({ orders, ordersPersonal, periodoLabe
 
   const totalRevenue = orders.reduce((s, o) => s + Number(o.total), 0);
   const totalPersonal = ordersPersonal.reduce((s, o) => s + Number(o.total), 0);
-  const moneyFmt = "$#,##0.00";
+  const moneyFmt = '€#,##0.00';
 
   // ── Resumen ──
   const wsResumen = nuevaHoja(wb, "Resumen", [
@@ -223,14 +223,29 @@ export async function exportarReporteExcel({ orders, ordersPersonal, periodoLabe
     const catsPersonal = desgloseCategorias(prodsPersonal);
     const wsPersonal = nuevaHoja(wb, "Consumo Personal", [
       { header: "Categoría", key: "categoria", width: 22 },
-      { header: "Cantidad consumida", key: "cantidad", width: 20 },
+      { header: "Producto", key: "nombre", width: 28 },
+      { header: "Precio unitario", key: "precioUnitario", width: 16 },
+      { header: "Cantidad", key: "cantidad", width: 12 },
       { header: "Total", key: "total", width: 16 },
     ]);
+    const filasTotalPersonal: number[] = [];
     catsPersonal.forEach((c) => {
-      wsPersonal.addRow({ categoria: c.categoria, cantidad: c.cantidad, total: c.total });
+      const itemsDeCat = prodsPersonal.filter((p) => p.categoria === c.categoria);
+      wsPersonal.addRow({ categoria: c.categoria, nombre: "TOTAL " + c.categoria, precioUnitario: "", cantidad: c.cantidad, total: c.total });
+      filasTotalPersonal.push(wsPersonal.rowCount);
+      itemsDeCat.forEach((p) => {
+        wsPersonal.addRow({ categoria: "", nombre: p.nombre, precioUnitario: p.precioUnitario, cantidad: p.cantidad, total: p.total });
+      });
     });
+    wsPersonal.getColumn("precioUnitario").numFmt = moneyFmt;
     wsPersonal.getColumn("total").numFmt = moneyFmt;
-    estilizarTabla(wsPersonal, 3);
+    estilizarTabla(wsPersonal, 5);
+    filasTotalPersonal.forEach((r) => {
+      wsPersonal.getRow(r).eachCell((c) => {
+        c.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFEDE3F7" } };
+        c.font = { name: FONT_NAME, bold: true, size: 10.5 };
+      });
+    });
   }
 
   // ── Historial ──

@@ -240,7 +240,7 @@ const Orders = () => {
                   </span>
                 )}
                 <span className={`font-semibold ${order.motivo === "anulado" ? "line-through text-muted-foreground" : "text-primary"}`}>
-                  ${Number(order.total).toFixed(2)}
+                  €{Number(order.total).toFixed(2)}
                 </span>
               </div>
             </motion.div>

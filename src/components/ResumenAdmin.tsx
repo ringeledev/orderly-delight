@@ -87,7 +87,7 @@ const ResumenAdmin = () => {
                   <MetricCard
                     icon={<TrendingUp size={16} />}
                     label="Recaudado"
-                    value={`$${resumen.totalRecaudado.toFixed(2)}`}
+                    value={`€${resumen.totalRecaudado.toFixed(2)}`}
                     highlight
                   />
                   {/* Pedidos cobrados */}
@@ -100,7 +100,7 @@ const ResumenAdmin = () => {
                   <MetricCard
                     icon={<TrendingUp size={16} />}
                     label="Ticket promedio"
-                    value={`$${resumen.ticketPromedio.toFixed(2)}`}
+                    value={`€${resumen.ticketPromedio.toFixed(2)}`}
                   />
                   {/* Clientes */}
                   <MetricCard

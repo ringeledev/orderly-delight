@@ -102,12 +102,12 @@ async function buildBoleta(body: BoletaBody): Promise<Buffer> {
   b.line("-");
 
   body.items.forEach((i) =>
-    b.text(`${i.cantidad}x ${i.nombre.padEnd(18).slice(0, 18)} $${(i.precio * i.cantidad).toFixed(2)}`)
+    b.text(`${i.cantidad}x ${i.nombre.padEnd(18).slice(0, 18)} €${(i.precio * i.cantidad).toFixed(2)}`)
   );
 
   b.line("-")
     .bold(true)
-    .text(`TOTAL: $${body.total.toFixed(2)}`)
+    .text(`TOTAL: €${body.total.toFixed(2)}`)
     .bold(false)
     .align("center")
     .feed(1)

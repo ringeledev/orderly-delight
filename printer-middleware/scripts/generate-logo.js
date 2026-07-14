@@ -4,7 +4,7 @@ const sharp = require("sharp");
 const path = require("path");
 
 const WIDTH = 384;
-const HEIGHT = 190;
+const HEIGHT = 170;
 
 const svg = `
 <svg width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}" xmlns="http://www.w3.org/2000/svg">
@@ -28,9 +28,6 @@ const svg = `
   <!-- Línea decorativa inferior -->
   <line x1="30" y1="160" x2="${WIDTH - 30}" y2="160" stroke="black" stroke-width="1"/>
   <line x1="30" y1="166" x2="${WIDTH - 30}" y2="166" stroke="black" stroke-width="3"/>
-
-  <text x="50%" y="184" text-anchor="middle"
-        font-family="Georgia, serif" font-size="14" letter-spacing="3" fill="black">COCINA LATINOAMERICANA</text>
 </svg>
 `;
 

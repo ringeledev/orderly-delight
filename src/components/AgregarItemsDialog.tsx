@@ -85,19 +85,23 @@ const AgregarItemsDialog = ({ pedidoUuid, clienteNombre, mesaNumero, onClose, on
     setError(null);
     try {
       const detalles: NuevoDetalle[] = [
-        ...items.map((i) => ({
-          producto_id: i.producto.uuid,
-          cantidad: i.cantidad,
-          precio_historico: i.producto.precio,
-          notas: i.notas.trim() || undefined,
-        })),
-        ...extraItems.map((e) => ({
-          producto_id: null as null,
-          nombre_extra: e.nombre,
-          cantidad: e.cantidad,
-          precio_historico: e.precio,
-          notas: e.notas || undefined,
-        })),
+        ...items.flatMap((i) =>
+          Array.from({ length: i.cantidad }, () => ({
+            producto_id: i.producto.uuid,
+            cantidad: 1,
+            precio_historico: i.producto.precio,
+            notas: i.notas.trim() || undefined,
+          }))
+        ),
+        ...extraItems.flatMap((e) =>
+          Array.from({ length: e.cantidad }, () => ({
+            producto_id: null as null,
+            nombre_extra: e.nombre,
+            cantidad: 1,
+            precio_historico: e.precio,
+            notas: e.notas || undefined,
+          }))
+        ),
       ];
       await agregarDetallesAPedido(pedidoUuid, detalles);
 
@@ -154,7 +158,7 @@ const AgregarItemsDialog = ({ pedidoUuid, clienteNombre, mesaNumero, onClose, on
                   <button key={producto.uuid} onClick={() => addItem(producto)}
                     className={`text-left p-3 rounded-lg border transition-all ${inCart ? "border-primary bg-primary/10" : "border-border bg-secondary/50 hover:border-primary/30"}`}>
                     <p className="text-sm font-medium text-foreground">{producto.nombre}</p>
-                    <p className="text-primary font-semibold text-sm">${producto.precio}</p>
+                    <p className="text-primary font-semibold text-sm">€{producto.precio}</p>
                     {inCart && <p className="text-xs text-muted-foreground mt-0.5">× {inCart.cantidad}</p>}
                   </button>
                 );
@@ -173,7 +177,7 @@ const AgregarItemsDialog = ({ pedidoUuid, clienteNombre, mesaNumero, onClose, on
                         <span className="w-5 text-center text-xs">{item.cantidad}</span>
                         <button onClick={() => updateQty(item.producto.uuid, 1)} className="p-1 rounded bg-secondary text-muted-foreground hover:text-foreground"><Plus size={12} /></button>
                         <button onClick={() => updateQty(item.producto.uuid, -item.cantidad)} className="p-1 rounded text-destructive hover:bg-destructive/10"><Trash2 size={12} /></button>
-                        <span className="w-14 text-right text-primary text-xs font-medium">${(item.producto.precio * item.cantidad).toFixed(2)}</span>
+                        <span className="w-14 text-right text-primary text-xs font-medium">€{(item.producto.precio * item.cantidad).toFixed(2)}</span>
                       </div>
                     </div>
                     <input type="text" placeholder="Notas…" value={item.notas}
@@ -189,7 +193,7 @@ const AgregarItemsDialog = ({ pedidoUuid, clienteNombre, mesaNumero, onClose, on
                       <span className="w-5 text-center text-xs">{e.cantidad}</span>
                       <button onClick={() => setExtraItems((prev) => prev.map((x) => x.id === e.id ? { ...x, cantidad: x.cantidad + 1 } : x))} className="p-1 rounded bg-secondary text-muted-foreground hover:text-foreground"><Plus size={12} /></button>
                       <button onClick={() => setExtraItems((prev) => prev.filter((x) => x.id !== e.id))} className="p-1 rounded text-destructive hover:bg-destructive/10"><Trash2 size={12} /></button>
-                      <span className="w-14 text-right text-primary text-xs font-medium">${(e.precio * e.cantidad).toFixed(2)}</span>
+                      <span className="w-14 text-right text-primary text-xs font-medium">€{(e.precio * e.cantidad).toFixed(2)}</span>
                     </div>
                   </div>
                 ))}
@@ -222,7 +226,7 @@ const AgregarItemsDialog = ({ pedidoUuid, clienteNombre, mesaNumero, onClose, on
             <div className="flex items-center justify-between pt-2 border-t border-border">
               <div>
                 <p className="text-muted-foreground text-xs">A agregar</p>
-                <p className="text-xl font-display text-primary">${total.toFixed(2)}</p>
+                <p className="text-xl font-display text-primary">€{total.toFixed(2)}</p>
               </div>
               <Button onClick={handleAgregar} disabled={totalItems === 0 || submitting}>
                 {submitting && <Loader2 className="animate-spin mr-2" size={16} />}
