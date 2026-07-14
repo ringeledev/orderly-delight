@@ -132,7 +132,10 @@ const Dashboard = () => {
   const MesaCard = ({ mesa }: { mesa: Mesa }) => {
     const pedidosMesa = ordersByTable[mesa.numero] ?? [];
     const ocupada = pedidosMesa.length > 0;
-    const total = pedidosMesa.reduce((s, p) => s + Number(p.total), 0);
+    const total = pedidosMesa.reduce((s, p) => {
+      const detalles = p.detalles_pedido ?? [];
+      return s + detalles.filter((d) => !d.cobrado).reduce((ds, d) => ds + d.precio_historico * d.cantidad, 0);
+    }, 0);
     const prioridad = ["pendiente", "en_preparacion", "listo", "entregado"];
     const estadoMostrar = pedidosMesa
       .map((p) => p.estado)
