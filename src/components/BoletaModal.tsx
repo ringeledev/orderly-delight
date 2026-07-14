@@ -22,15 +22,19 @@ interface Props {
 }
 
 export function detallesABoleta(detalles: DetallePedido[], soloUuids?: string[]): BoletaItem[] {
-  return detalles
-    .filter((d) => !soloUuids || soloUuids.includes(d.uuid ?? ""))
-    .map((d) => ({
-      uuid: d.uuid,
-      nombre: d.productos?.nombre ?? d.nombre_extra ?? "Ítem extra",
-      cantidad: d.cantidad,
-      precio: d.precio_historico,
-      notas: d.notas,
-    }));
+  const filtrados = detalles.filter((d) => !soloUuids || soloUuids.includes(d.uuid ?? ""));
+  const map: Record<string, BoletaItem> = {};
+  filtrados.forEach((d) => {
+    const nombre = d.productos?.nombre ?? d.nombre_extra ?? "Ítem extra";
+    const notas = d.notas ?? "";
+    const key = `${nombre}||${d.precio_historico}||${notas}`;
+    if (map[key]) {
+      map[key].cantidad += d.cantidad;
+    } else {
+      map[key] = { uuid: d.uuid, nombre, cantidad: d.cantidad, precio: d.precio_historico, notas: d.notas };
+    }
+  });
+  return Object.values(map);
 }
 
 const BoletaModal = ({ mesaNumero, lider, items, mesero, cerrado_at, onClose }: Props) => {
