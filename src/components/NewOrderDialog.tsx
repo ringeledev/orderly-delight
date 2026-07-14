@@ -256,7 +256,7 @@ const NewOrderDialog = ({ tableNumber, user, existingLideres = [], onClose, onCr
                       }`}
                     >
                       <p className="text-sm font-medium text-foreground">{producto.nombre}</p>
-                      <p className="text-primary font-semibold text-sm">€{producto.precio}</p>
+                      <p className="text-primary font-semibold text-sm">${producto.precio}</p>
                       {inCart && (
                         <p className="text-xs text-muted-foreground mt-0.5">× {inCart.cantidad}</p>
                       )}
@@ -284,7 +284,7 @@ const NewOrderDialog = ({ tableNumber, user, existingLideres = [], onClose, onCr
                           <Trash2 size={12} />
                         </button>
                         <span className="w-14 text-right text-primary font-medium text-xs">
-                          €{(item.producto.precio * item.cantidad).toFixed(2)}
+                          ${(item.producto.precio * item.cantidad).toFixed(2)}
                         </span>
                       </div>
                     </div>
@@ -313,7 +313,7 @@ const NewOrderDialog = ({ tableNumber, user, existingLideres = [], onClose, onCr
                         <Trash2 size={12} />
                       </button>
                       <span className="w-14 text-right text-primary font-medium text-xs">
-                        €{(e.precio * e.cantidad).toFixed(2)}
+                        ${(e.precio * e.cantidad).toFixed(2)}
                       </span>
                     </div>
                   </div>
@@ -375,7 +375,7 @@ const NewOrderDialog = ({ tableNumber, user, existingLideres = [], onClose, onCr
             <div className="flex items-center justify-between pt-2 border-t border-border">
               <div>
                 <p className="text-muted-foreground text-xs">Total</p>
-                <p className="text-xl font-display text-primary">€{total.toFixed(2)}</p>
+                <p className="text-xl font-display text-primary">${total.toFixed(2)}</p>
               </div>
               <Button
                 onClick={handleCreate}

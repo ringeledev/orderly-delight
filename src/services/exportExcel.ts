@@ -109,7 +109,7 @@ export async function exportarReporteExcel({ orders, ordersPersonal, periodoLabe
 
   const totalRevenue = orders.reduce((s, o) => s + Number(o.total), 0);
   const totalPersonal = ordersPersonal.reduce((s, o) => s + Number(o.total), 0);
-  const moneyFmt = '€#,##0.00';
+  const moneyFmt = '$#,##0.00';
 
   // ── Resumen ──
   const wsResumen = nuevaHoja(wb, "Resumen", [

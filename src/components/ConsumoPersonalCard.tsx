@@ -114,14 +114,14 @@ const ConsumoPersonalCard = () => {
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                     <div className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3">
                       <p className="text-purple-400 text-xs">Total consumido</p>
-                      <p className="font-display text-lg text-purple-200">€{data.total.toFixed(2)}</p>
+                      <p className="font-display text-lg text-purple-200">${data.total.toFixed(2)}</p>
                       <p className="text-xs text-muted-foreground">{data.cantidadPedidos} pedidos</p>
                     </div>
                     <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
                       <div className="flex items-center gap-1 text-blue-400 text-xs">
                         <GlassWater size={12} /> Bebidas + Extras
                       </div>
-                      <p className="font-display text-lg text-blue-200">€{totalBebidasPersonal.toFixed(2)}</p>
+                      <p className="font-display text-lg text-blue-200">${totalBebidasPersonal.toFixed(2)}</p>
                       <p className="text-xs text-muted-foreground">{cantidadBebidasPersonal} unidades</p>
                     </div>
                     <div className="bg-secondary/50 border border-border rounded-lg p-3">
@@ -160,7 +160,7 @@ const ConsumoPersonalCard = () => {
                             </div>
                             <div className="flex items-center gap-2 shrink-0">
                               <span className={`text-sm font-medium ${bebida ? "text-blue-300" : "text-foreground"}`}>
-                                €{cat.total.toFixed(2)}
+                                ${cat.total.toFixed(2)}
                               </span>
                               {isOpen ? <ChevronUp size={14} className="text-muted-foreground" /> : <ChevronDown size={14} className="text-muted-foreground" />}
                             </div>
@@ -180,7 +180,7 @@ const ConsumoPersonalCard = () => {
                               {cat.items.map((item, i) => (
                                 <div key={i} className="flex justify-between text-xs">
                                   <span className="text-foreground">{item.cantidad}× {item.nombre}</span>
-                                  <span className="text-muted-foreground">€{item.total.toFixed(2)}</span>
+                                  <span className="text-muted-foreground">${item.total.toFixed(2)}</span>
                                 </div>
                               ))}
                             </div>

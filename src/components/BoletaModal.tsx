@@ -102,7 +102,7 @@ const BoletaModal = ({ mesaNumero, lider, items, mesero, cerrado_at, onClose }: 
               <div key={i}>
                 <div className="flex justify-between">
                   <span>{item.cantidad}× {item.nombre}</span>
-                  <span>€{(item.precio * item.cantidad).toFixed(2)}</span>
+                  <span>${(item.precio * item.cantidad).toFixed(2)}</span>
                 </div>
                 {item.notas && (
                   <p className="text-xs text-gray-400 pl-4">↳ {item.notas}</p>
@@ -113,7 +113,7 @@ const BoletaModal = ({ mesaNumero, lider, items, mesero, cerrado_at, onClose }: 
           <hr className="border-dashed border-gray-400 my-1" />
           <div className="flex justify-between font-bold text-base">
             <span>TOTAL</span>
-            <span>€{total.toFixed(2)}</span>
+            <span>${total.toFixed(2)}</span>
           </div>
           <p className="text-center text-xs text-gray-400 pt-1">¡Gracias por su visita!</p>
         </div>

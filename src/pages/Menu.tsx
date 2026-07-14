@@ -173,7 +173,7 @@ const Menu = () => {
                 >
                   <div>
                     <p className="text-foreground font-medium text-sm">{product.nombre}</p>
-                    <p className="text-primary font-semibold">€{product.precio}</p>
+                    <p className="text-primary font-semibold">${product.precio}</p>
                   </div>
                   {isAdmin && (
                     <div className="flex gap-1">

@@ -107,7 +107,7 @@ const OrderDetailDialog = ({ order, onClose, onUpdate }: Props) => {
                     )}
                   </div>
                   <span className="text-primary font-medium shrink-0">
-                    €{(d.precio_historico * d.cantidad).toFixed(2)}
+                    ${(d.precio_historico * d.cantidad).toFixed(2)}
                   </span>
                 </div>
               ))
@@ -119,7 +119,7 @@ const OrderDetailDialog = ({ order, onClose, onUpdate }: Props) => {
               <div>
                 <p className="text-muted-foreground text-xs">Total</p>
                 <p className="text-xl font-display text-primary">
-                  €{Number(order.total).toFixed(2)}
+                  ${Number(order.total).toFixed(2)}
                 </p>
               </div>
               <p className="text-muted-foreground text-xs text-right">

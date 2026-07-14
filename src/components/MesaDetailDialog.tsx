@@ -227,7 +227,7 @@ const MesaDetailDialog = ({ mesa, onClose, onUpdate, onNewOrder }: Props) => {
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="text-primary font-semibold text-sm">
-                          €{pendienteTotal.toFixed(2)}
+                          ${pendienteTotal.toFixed(2)}
                         </span>
                         {isOpen ? (
                           <ChevronUp size={14} className="text-muted-foreground" />
@@ -285,7 +285,7 @@ const MesaDetailDialog = ({ mesa, onClose, onUpdate, onNewOrder }: Props) => {
                                         {d.productos?.nombre ?? d.nombre_extra ?? "Ítem extra"}
                                       </span>
                                       <span className="text-muted-foreground text-xs">
-                                        €{(d.precio_historico * d.cantidad).toFixed(2)}
+                                        ${(d.precio_historico * d.cantidad).toFixed(2)}
                                       </span>
                                     </div>
                                     {d.notas && (
@@ -310,7 +310,7 @@ const MesaDetailDialog = ({ mesa, onClose, onUpdate, onNewOrder }: Props) => {
                                   {d.cantidad}×{" "}
                                   {d.productos?.nombre ?? d.nombre_extra ?? "Extra"}
                                 </span>
-                                <span>€{(d.precio_historico * d.cantidad).toFixed(2)}</span>
+                                <span>${(d.precio_historico * d.cantidad).toFixed(2)}</span>
                               </div>
                             ))}
                           </div>
@@ -344,7 +344,7 @@ const MesaDetailDialog = ({ mesa, onClose, onUpdate, onNewOrder }: Props) => {
                             {cobrando === pedido.uuid ? (
                               <Loader2 className="animate-spin" size={14} />
                             ) : sel.size > 0 ? (
-                              `Cobrar €${selectedTotal.toFixed(2)} (${sel.size} ítem${sel.size !== 1 ? "s" : ""})`
+                              `Cobrar $${selectedTotal.toFixed(2)} (${sel.size} ítem${sel.size !== 1 ? "s" : ""})`
                             ) : (
                               "Seleccioná ítems"
                             )}
@@ -363,7 +363,7 @@ const MesaDetailDialog = ({ mesa, onClose, onUpdate, onNewOrder }: Props) => {
               {pedidos.length > 0 && (
                 <>
                   <p className="text-muted-foreground text-xs">Total pendiente</p>
-                  <p className="text-xl font-display text-primary">€{totalMesa.toFixed(2)}</p>
+                  <p className="text-xl font-display text-primary">${totalMesa.toFixed(2)}</p>
                 </>
               )}
             </div>
