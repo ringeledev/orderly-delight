@@ -18,7 +18,7 @@ async function callMiddleware(path: string, body: unknown): Promise<PrintResult>
   try {
     const res = await fetch(`${PRINT_URL}${path}`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "ngrok-skip-browser-warning": "1" },
       body: JSON.stringify(body),
     });
     return await res.json();
@@ -96,7 +96,9 @@ export async function imprimirBoletaYAbrirGaveta(
 
 export async function chequearImpresoras(): Promise<{ id: string; nombre: string; online: boolean }[]> {
   try {
-    const res = await fetch(`${PRINT_URL}/api/printers/status`);
+    const res = await fetch(`${PRINT_URL}/api/printers/status`, {
+      headers: { "ngrok-skip-browser-warning": "1" },
+    });
     return await res.json();
   } catch {
     return [];
