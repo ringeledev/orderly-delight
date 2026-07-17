@@ -288,10 +288,16 @@ const ProductDialog = ({
             className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
           >
             <option value="">— Categoría —</option>
-            <option value="Comida">Comida</option>
-            <option value="Bebidas">Bebidas</option>
-            <option value="Extras Bebidas">Extras Bebidas</option>
-            <option value="Extras Comidas">Extras Comidas</option>
+            <option value="Bebidas alcoholicas">Bebidas alcoholicas</option>
+            <option value="Bebidas sin alcohol">Bebidas sin alcohol</option>
+            <option value="Café">Café</option>
+            <option value="Shots">Shots</option>
+            <option value="Extras bebidas">Extras bebidas</option>
+            <option value="Entrada">Entrada</option>
+            <option value="Plato fuerte">Plato fuerte</option>
+            <option value="Postre">Postre</option>
+            <option value="Bocadillos">Bocadillos</option>
+            <option value="Extras comidas">Extras comidas</option>
           </select>
           <label className="flex items-center gap-2 text-sm text-foreground cursor-pointer">
             <input
