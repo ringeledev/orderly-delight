@@ -50,7 +50,12 @@ const AgregarItemsDialog = ({ pedidoUuid, clienteNombre, mesaNumero, onClose, on
       .finally(() => setLoadingProductos(false));
   }, []);
 
-  const categories = [...new Set(productos.map((p) => p.categoria))];
+  const CATEGORY_ORDER = ["Bebidas alcoholicas","Bebidas sin alcohol","Shots","Café","Extras bebidas","Entrada","Plato fuerte","Bocadillos","Postre","Extras comidas"];
+  const categories = [...new Set(productos.map((p) => p.categoria))].sort((a, b) => {
+    const ai = CATEGORY_ORDER.indexOf(a);
+    const bi = CATEGORY_ORDER.indexOf(b);
+    return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+  });
 
   const addItem = (producto: Producto) => {
     setItems((prev) => {
